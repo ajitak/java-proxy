@@ -12,15 +12,7 @@ public class ProxyTest {
         BoxPair<String, Integer> original = new BoxPair<>(new Box<>(), new Box<>());
         AtomicInteger counter = new AtomicInteger();
         BoxPair<String, Integer> proxy = createProxy(original, counter);
-
-        IntStream.range(1, 100).forEach(i -> {
-            if (Math.random() < 0.5) {
-                proxy.getFirst();
-            } else {
-                proxy.getSecond();
-            }
-        });
-
+        RandomInvoker.run(proxy);
         System.out.printf("getFirst was called %d times", counter.get());
     }
 
